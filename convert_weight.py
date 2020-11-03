@@ -49,7 +49,7 @@ def convert_conv(vars, source_name, target_name, bias=True, start=0):
 
     dic_torch = {}
 
-    print(target_name + f".{start}.weight")
+    print(target_name+"."+ str(start) + ".weight")
     dic_torch[target_name + f".{start}.weight"] = torch.from_numpy(dic["weight"])
 
     if bias:
