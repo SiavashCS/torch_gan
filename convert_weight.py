@@ -49,6 +49,7 @@ def convert_conv(vars, source_name, target_name, bias=True, start=0):
 
     dic_torch = {}
 
+    print(target_name + f".{start}.weight")
     dic_torch[target_name + f".{start}.weight"] = torch.from_numpy(dic["weight"])
 
     if bias:
@@ -201,10 +202,12 @@ if __name__ == "__main__":
     device = "cuda"
 
     parser = argparse.ArgumentParser(description='Tensorflow to pytorch model checkpoint converter')
-    parser.add_argument("--repo", type=str, required=True, help='path to the offical StyleGAN2 repository with dnnlib/ folder')
+    parser.add_argument("--repo", type=str, required=True,
+                        help='path to the offical StyleGAN2 repository with dnnlib/ folder')
     parser.add_argument("--gen", action="store_true", help='convert the generator weights')
     parser.add_argument("--disc", action="store_true", help='convert the discriminator weights')
-    parser.add_argument("--channel_multiplier", type=int, default=2, help='channel multiplier factor. config-f = 2, else = 1')
+    parser.add_argument("--channel_multiplier", type=int, default=2,
+                        help='channel multiplier factor. config-f = 2, else = 1')
     parser.add_argument("path", metavar="PATH", help='path to the tensorflow weights')
 
     args = parser.parse_args()
@@ -277,4 +280,3 @@ if __name__ == "__main__":
     utils.save_image(
         img_concat, name + ".png", nrow=n_sample, normalize=True, range=(-1, 1)
     )
-
